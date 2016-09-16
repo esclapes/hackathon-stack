@@ -1,3 +1,10 @@
+phoenix:
+  build: images/phoenix
+  command: mix phoenix.server
+  ports:
+    - "4000:4000"
+  volumes:
+    - ./images/phoenix/app:/app/phoenix
 nginx:
   build: images/nginx
   command: nginx -g "daemon off;"
@@ -8,8 +15,8 @@ nginx:
 php:
   build: images/php
   volumes:
-    - ./images/php/app:/app
-  working_dir: /app/public
+    - ./images/php/app:/app/lumen
+  working_dir: /app/lumen/public
   command: php-fpm
   links:
     - db
