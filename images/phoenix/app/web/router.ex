@@ -1,5 +1,7 @@
 defmodule Web.Router do
   use Web.Web, :router
+  use Terraform,
+    terraformer: Web.Terraformers.Kohana
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,9 +16,10 @@ defmodule Web.Router do
   end
 
   scope "/", Web do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :api #browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/hello-phoenix", PageController, :hello
   end
 
   # Other scopes may use custom stacks.
